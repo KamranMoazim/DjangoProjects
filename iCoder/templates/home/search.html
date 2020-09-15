@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+{% block blogactive %}  {% endblock blogactive %}
+
+{% block title %} SEARCH RESULT PAGE {% endblock title %}
+
+{% block body %} 
+<div class="container my-3">
+    <h2 class="m-3 " style="text-align:center">Search Results</h2>
+    {% if allPosts|length < 1 %}
+    <div class="container"><b>Your Search --> </b>{{ query }} did not match any Document.</div>
+    
+    <h6><i>Suggestions : Try Different Words!</i></h6>
+    {% endif %}
+    {% for post in allPosts %}
+    <div class="row no-gutters border rounded overflow-hidden flex-md-row my-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-primary"><i>Article By: </i>{{post.author}}</strong>
+          <h3 class="mb-0">{{post.title}}</h3>
+          <div class="mb-1 text-muted">{{post.datetime}}</div>
+          <p class="card-text mb-auto">{{post.content | truncatechars:400}}</p>
+          <div class="my-2">
+            <a href="/blog/{{post.slug}}" role="button" class="btn btn-primary">Continue reading</a>
+          </div>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+            <img src="" alt="" width="200" height="250">
+        </div>        
+    </div>
+    {% endfor %}
+</div>
+{% endblock body %}
+
+{% block js %}  {% endblock js %}
